@@ -25,8 +25,8 @@
                 <tbody>
                 <tr th:each="user: ${user}">
                     <td><input size="5%" readonly type="number" th:field="*{id}" id="id"></td>
-                    <td><input size="15%" readonly type="text" th:field="*{firstName}" id="firstName"></td>
-                    <td><input size="20%" readonly type="text" th:field="*{lastName}" id="lastName"></td>
+                    <td><input size="15%" readonly type="text" th:field="*{name}" id="firstName"></td>
+                    <td><input size="20%" readonly type="text" th:field="*{password}" id="lastName"></td>
                     <td><input size="20%" type="text" th:field="*{telNumber}" id="telNumber"></td>
                     <td><input size="20%" type="text" th:field="*{email}" id="email"></td>
                     <td><input size="20%" type="text" th:field="*{userRole}" id="userRole"></td>

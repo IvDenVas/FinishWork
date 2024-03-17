@@ -10,6 +10,14 @@ body {
     margin: 0 auto;
     border-radius: 10px;
 }
+.container2 {
+    background-color:white;
+    padding: 5px;
+    max-width: 500px;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 10px;
+}
 
 h2, input{
     text-align: center;

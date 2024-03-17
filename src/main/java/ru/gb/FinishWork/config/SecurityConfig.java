@@ -35,11 +35,30 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/login").permitAll() //вход без авторизации
-                        .requestMatchers("**").authenticated()
-                        .requestMatchers("admin/**").authenticated()) //с авторизацией и аутентификацией
+                        .requestMatchers("/main/**").authenticated()
+                        .requestMatchers("admin").hasAuthority("admin")
+                        .requestMatchers("admin/**").hasAuthority("admin")
+                        .anyRequest().authenticated()) //с авторизацией и аутентификацией
                 .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
+//                .formLogin(
+//                        form -> form
+//                                .loginPage("/login")
+//                                .loginProcessingUrl("/login")
+////                                .defaultSuccessUrl("/welcome")
+//                                .permitAll()
+//                )
                 .build();
     }
+//    @Bean
+//    SecurityFilterChain securityFilterChain(HttpSecurity http, UserSecurity userSecurity) throws Exception {
+//        http.authorizeHttpRequests(
+//                auth -> {
+//                    auth
+//                            .requestMatchers("/users/{userId}/**").access(userSecurity);
+//                }
+//        );
+//        return http.build();
+//    }
 
     @Bean //Ставим степень кодировки, с которой кодировали пароль в базе
     public PasswordEncoder passwordEncoder() {

@@ -22,5 +22,7 @@ public class Note {
     private String description;
     @Column(name="date",nullable = false,columnDefinition = "DATE")
     private LocalDateTime dateTime = LocalDateTime.now();
+    @Column(name = "id_user")
+    private Long idUser;
 
 }
