@@ -10,4 +10,5 @@ import java.util.Optional;
 @Repository
 public interface NoteRepo extends JpaRepository<Note, Long> {
     List<Note> findAllByIdUser(Long aLong);
+    void deleteAllByIdUser(Long aLong);
 }

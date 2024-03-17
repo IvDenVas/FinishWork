@@ -50,4 +50,7 @@ public class NoteServiceImplements implements NoteService {
         Note note = getNoteById(id);
         noteRepo.delete(note);
     }
+    public void deleteAllNoteByIdUser(Long id){
+        noteRepo.deleteAllByIdUser(id);
+    }
 }

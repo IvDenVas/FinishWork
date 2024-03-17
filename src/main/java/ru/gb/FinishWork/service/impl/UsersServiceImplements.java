@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.gb.FinishWork.model.User;
 import ru.gb.FinishWork.model.UserRole;
+import ru.gb.FinishWork.repository.NoteRepo;
 import ru.gb.FinishWork.repository.UsersRepo;
 import ru.gb.FinishWork.service.UsersService;
 
@@ -42,6 +43,7 @@ public class UsersServiceImplements implements UsersService {
     }
 
     @Override
+
     public void deleteUserById(Long id) {
         User user = getUserById(id);
         usersRepo.delete(user);
