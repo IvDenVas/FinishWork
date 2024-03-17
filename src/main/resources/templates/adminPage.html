@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Админка</title>
+    <link th:href="@{/styles/style.css}" rel="stylesheet">
+    <link rel="stylesheet" href="../static/styles/style.css">
+</head>
+<main>
+    <body>
+    <div class="container1">
+        <h2>Все заметки</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Дата создания</th>
+                <th>Заголовок</th>
+                <th>Описание</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="note: ${notes}">
+                <td style="width:10%" th:text="${note.getId()}"></td>
+                <td style="width:10%" th:text="${note.getDateTime()}"></td>
+                <td style="width:20%" th:text="${note.getTitle()}"></td>
+                <td style="width:50%" th:text="${note.getDescription}"></td>
+                <td><a th:href="@{admin/update/{id}(id=${note.id})}"><button>Изменить</button></a></td>
+                <td><a th:href="@{admin/delete/{id}(id=${note.id})}"><button>Удалить</button></a></td>
+            </tr>
+            </tbody>
+        </table>
+        <h2>Все пользователи</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Имя</th>
+                <th>Пароль</th>
+                <th>Телефон</th>
+                <th>Почта</th>
+                <th>Роль</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user: ${users}">
+                <td style="width:5%" th:text="${user.getId()}"></td>
+                <td style="width:20%" th:text="${user.getName()}"></td>
+                <td style="width:20%" th:text="${user.getPassword()}"></td>
+                <td style="width:20%" th:text="${user.getTelNumber()}"></td>
+                <td style="width:20%" th:text="${user.getEmail()}"></td>
+                <td style="width:20%" th:text="${user.getUserRole()}"></td>
+                <td><a th:href="@{admin/updateUser/{id}(id=${user.id})}"><button>Изменить</button></a></td>
+                <td><a th:href="@{admin/delete/{id}(id=${user.id})}"><button>Удалить</button></a></td>
+            </tr>
+            </tbody>
+        </table>
+        <form action="/admin" method="post">
+            <label>Добавить пользователя:</label>
+            <input type="text" name="name" placeholder="Имя">
+            <input type="text" name="password" placeholder="Пароль">
+            <input type="text" name="telNumber" placeholder="Телефон">
+            <input type="text" name="email" placeholder="Почта">
+<!--            <input type="text" name="title" placeholder="Роль">-->
+<!--            <form>-->
+                <select name="userRole">
+                    <option value="">--Выбрать роль--</option>
+                    <option value="admin">Admin</option>
+                    <option value="user">User</option>
+                </select>
+<!--            </form>-->
+            <input type="submit" value="Добавить пользователя">
+        </form>
+    </div>
+    </body>
+</main>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Заметки</title>
+    <link th:href="@{/styles/style.css}" rel="stylesheet">
+    <link rel="stylesheet" href="../static/styles/style.css">
+</head>
+<main>
+    <body>
+    <div class="container1">
+        <h2>Измените описание заметки</h2>
+        <form th:action="@{/admin}" th:object="${user}" th:method="post" method="post">
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Имя</th>
+                    <th>Фамилия</th>
+                    <th>Телефон</th>
+                    <th>Почта</th>
+                    <th>Роль</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user: ${user}">
+                    <td><input size="5%" readonly type="number" th:field="*{id}" id="id"></td>
+                    <td><input size="15%" readonly type="text" th:field="*{firstName}" id="firstName"></td>
+                    <td><input size="20%" readonly type="text" th:field="*{lastName}" id="lastName"></td>
+                    <td><input size="20%" type="text" th:field="*{telNumber}" id="telNumber"></td>
+                    <td><input size="20%" type="text" th:field="*{email}" id="email"></td>
+                    <td><input size="20%" type="text" th:field="*{userRole}" id="userRole"></td>
+                    <td><a><input type="submit" value="Изменить"></a></td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+        <h1></h1>
+    </div>
+    </body>
+</main>
+</html>
