@@ -1,0 +1,12 @@
+.container1 {
+    background-color:white;
+    padding: 5px;
+    max-width: 500px;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 10px;
+    line-height: 30px;
+}
+body {
+    background-color: silver;
+}

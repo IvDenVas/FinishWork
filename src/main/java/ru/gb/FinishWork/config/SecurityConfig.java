@@ -5,23 +5,23 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractAuthenticationFilterConfigurer;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import ru.gb.FinishWork.service.user.MyUserDetailsService;
 
 @EnableWebSecurity
 @Configuration
-public class SecurityConfig {
-
-    @Bean //возвращаем кастомный MyUserDetailsService, который напишем далее
+public class SecurityConfig implements WebSecurityCustomizer {
+    @Bean
     public UserDetailsService userDetailsService() {
         return new MyUserDetailsService();
     }
-
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
@@ -29,39 +29,31 @@ public class SecurityConfig {
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/login").permitAll() //вход без авторизации
+                .authorizeHttpRequests(auth -> auth.requestMatchers("login/**")
+                        .permitAll()
+                        .requestMatchers("/main/register/**").permitAll()
                         .requestMatchers("/main/**").authenticated()
                         .requestMatchers("admin").hasAuthority("admin")
                         .requestMatchers("admin/**").hasAuthority("admin")
-                        .anyRequest().authenticated()) //с авторизацией и аутентификацией
-                .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
-//                .formLogin(
-//                        form -> form
-//                                .loginPage("/login")
-//                                .loginProcessingUrl("/login")
-////                                .defaultSuccessUrl("/welcome")
-//                                .permitAll()
-//                )
+                        .anyRequest().authenticated())
+                .formLogin(form -> form
+                                .loginPage("/login")
+                                .loginProcessingUrl("/login")
+                                .defaultSuccessUrl("/main")
+                                .permitAll())
                 .build();
     }
-//    @Bean
-//    SecurityFilterChain securityFilterChain(HttpSecurity http, UserSecurity userSecurity) throws Exception {
-//        http.authorizeHttpRequests(
-//                auth -> {
-//                    auth
-//                            .requestMatchers("/users/{userId}/**").access(userSecurity);
-//                }
-//        );
-//        return http.build();
-//    }
-
-    @Bean //Ставим степень кодировки, с которой кодировали пароль в базе
+    @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(5);
+    }
+
+    @Override
+    public void customize(WebSecurity web) {
+        web.ignoring().requestMatchers("/css/**");
     }
 }

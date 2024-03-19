@@ -23,7 +23,6 @@ public class AdminController {
     private NoteServiceImplements noteServiceImplements;
 
     @GetMapping()
-//    @PreAuthorize("hasAuthority('admin')")
     public String adminForm(Model model) {
         List<Note> noteList = noteServiceImplements.getAllNotes();
         List<User> userList = usersServiceImplements.getAllUsers();
@@ -32,31 +31,25 @@ public class AdminController {
     }
 
     @PostMapping()
-//    @PreAuthorize("hasAuthority('admin')")
     public String addUser(User user, Model model) {
         usersServiceImplements.newUser(user);
-//        fileGateway.writeToFile("NewNotes.txt", "Заголовок: " + note.getTitle() + ", тело заметки:  "
-//                + note.getDescription() + " ,дата создания: " + note.getDateTime());
         return "redirect:/admin";
     }
 
     @GetMapping("/delete/{id}")
     @Transactional
-//    @PreAuthorize("hasAuthority('admin')")
     public String deleteUser(@PathVariable("id") Long id) {
         noteServiceImplements.deleteAllNoteByIdUser(id);
         usersServiceImplements.deleteUserById(id);
         return "redirect:/admin";
     }
     @GetMapping("/updateUser/{id}")
-//    @PreAuthorize("hasAuthority('admin')")
     public String updateNoteForm(@PathVariable("id") long id, Model model) {
         model.addAttribute("user", usersServiceImplements.getUserById(id));
         return "updateUser";
     }
 
     @PutMapping("/updateUser")
-//    @PreAuthorize("hasAuthority('admin')")
     public String updateNote(@PathVariable("id") Long id, @ModelAttribute("note") User user) {
         usersServiceImplements.updateUser(id, user);
         return "redirect:/admin";

@@ -3,13 +3,8 @@ package ru.gb.FinishWork.service.impl;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.gb.FinishWork.aspect.TrackUserAction;
-import ru.gb.FinishWork.config.MyUserDetails;
-import ru.gb.FinishWork.config.MyUserDetailsService;
 import ru.gb.FinishWork.model.Note;
-import ru.gb.FinishWork.model.User;
-import ru.gb.FinishWork.model.UserRole;
 import ru.gb.FinishWork.repository.NoteRepo;
-import ru.gb.FinishWork.repository.UsersRepo;
 import ru.gb.FinishWork.service.NoteService;
 import java.util.List;
 
@@ -52,5 +47,8 @@ public class NoteServiceImplements implements NoteService {
     }
     public void deleteAllNoteByIdUser(Long id){
         noteRepo.deleteAllByIdUser(id);
+    }
+    public List<Note> getAllNotesByIdUser(Long aLong){
+        return noteRepo.findAllByIdUser(aLong);
     }
 }

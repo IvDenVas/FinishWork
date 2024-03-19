@@ -2,45 +2,28 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
-    <link th:href="@{/styles/style.css}" type="text/css" rel="stylesheet">
-<!--    <link rel="stylesheet" href="../static/styles/style.css" type="text/css">-->
+    <title>Вход</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styleLogPage.css}">
+<!--    <link rel="stylesheet" type="text/css" href="/static/css/styleLogPage.css">-->
 </head>
-
 <body>
-<main>
-    <div class="container2">
-        <h2>Добро пожаловать</h2>
-        <form
-                method="post"
-                role="form"
-                th:action="@{/login}"
-                class="form-horizontal"
-        >
-            <div>
-                <label class="control-label"> Name</label>
-                <input type="text" id="name" name="name" class="form-control" placeholder="Enter name"
-                />
-            </div>
-
-            <div>
-                <label class="control-label"> Password</label>
-                <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        class="form-control"
-                        placeholder="Enter password"
-                />
-            </div>
-            <div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-                <span> Not registered ?
-                                <a th:href="@{/register}">Register/Signup here</a>
-                            </span>
-            </div>
-        </form>
-    </div>
-</main>
+    <main>
+        <div class="container1">
+            <h1>Авторизуйтесь</h1>
+            <div th:if="${param.error}">Пользователь! Проверьте логин и пароль!</div>
+            <div th:if="${param.logout}">Вы можете выйти из системы.</div>
+            <form th:action="@{/login}" method="post">
+                <div>
+                    <input type="text" name="username" placeholder="Login"/>
+                </div>
+                <div>
+                    <input type="password" name="password" placeholder="Password"/>
+                </div>
+                <input type="submit" value="Log in" />
+                <div><span> Не зарегистрирован?<a th:href="@{/main/register}"> Регистрация тут.</a></span>
+                </div>
+            </form>
+        </div>
+    </main>
 </body>
 </html>

@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Заметки</title>
-    <link th:href="@{/styles/style.css}" rel="stylesheet">
-    <link rel="stylesheet" href="../static/styles/style.css">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/style.css">
 </head>
+<body>
 <main>
-    <body>
     <div class="container1">
         <h2>Измените описание заметки</h2>
         <form th:action="@{/admin}" th:object="${user}" th:method="post" method="post">
@@ -37,6 +37,6 @@
         </form>
         <h1></h1>
     </div>
-    </body>
 </main>
+</body>
 </html>
