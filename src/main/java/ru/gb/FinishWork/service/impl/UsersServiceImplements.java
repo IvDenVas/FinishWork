@@ -1,12 +1,17 @@
 package ru.gb.FinishWork.service.impl;
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.gb.FinishWork.model.User;
 import ru.gb.FinishWork.model.UserRole;
-import ru.gb.FinishWork.repository.NoteRepo;
 import ru.gb.FinishWork.repository.UsersRepo;
 import ru.gb.FinishWork.service.UsersService;
+import ru.gb.FinishWork.service.user.MyUserDetailsService;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,28 +38,32 @@ public class UsersServiceImplements implements UsersService {
         updateUser.setPassword(user.getPassword());
         updateUser.setTelNumber(user.getTelNumber());
         updateUser.setEmail(user.getEmail());
-        updateUser.setUserRole(UserRole.user);
+        updateUser.setUserRole(user.getUserRole());
+        updateUser.setId(user.getId());
         return usersRepo.save(updateUser);
     }
 
     @Override
     public User newUser(User user) {
+        user.setPassword(new BCryptPasswordEncoder(5).encode(user.getPassword()));
         return usersRepo.save(user);
     }
 
     @Override
+    public void registrationUser(User user){
+        user.setPassword(new BCryptPasswordEncoder(5).encode(user.getPassword()));
+        usersRepo.save(user);
+    }
 
+    @Override
     public void deleteUserById(Long id) {
         User user = getUserById(id);
         usersRepo.delete(user);
     }
 
-    //    @Override
-//    public User getUserByName(String login){
-//        return usersRepo.findByName(login).get();
-//    }
-//    @Override
+    @Override
     public Optional<User> getUserByName(String username) {
         return usersRepo.findByName(username);
     }
+
 }

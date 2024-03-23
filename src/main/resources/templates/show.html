@@ -12,9 +12,12 @@
         <h2>Список заметок</h2>
         <form action="/main" method="post">
             <label>Новая заметка</label>
-            <input type="text" name="title" placeholder="Введите заголовок">
-            <input size="90" type="text" name="description" placeholder="Введите заметку">
-
+            <label>
+                <input type="text" name="title" placeholder="Введите заголовок">
+            </label>
+            <label>
+                <input size="90" type="text" name="description" placeholder="Введите заметку">
+            </label>
             <input type="submit" value="Добавить">
         </form>
         <table>
@@ -41,6 +44,9 @@
             </tr>
             </tbody>
         </table>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
     </div>
 </main>
 </body>

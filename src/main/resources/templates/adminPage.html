@@ -17,6 +17,7 @@
                 <th>Дата создания</th>
                 <th>Заголовок</th>
                 <th>Описание</th>
+                <th>ID автора</th>
             </tr>
             </thead>
             <tbody>
@@ -25,10 +26,11 @@
                 <td style="width:10%" th:text="${note.getDateTime()}"></td>
                 <td style="width:20%" th:text="${note.getTitle()}"></td>
                 <td style="width:50%" th:text="${note.getDescription}"></td>
-                <td><a th:href="@{admin/update/{id}(id=${note.id})}">
+                <td style="width:50%" th:text="${note.getIdUser}"></td>
+                <td><a th:href="@{admin/updateNote/{id}(id=${note.id})}">
                     <button>Изменить</button>
                 </a></td>
-                <td><a th:href="@{admin/delete/{id}(id=${note.id})}">
+                <td><a th:href="@{admin/deleteFromAdmin/{id}(id=${note.id})}">
                     <button>Удалить</button>
                 </a></td>
             </tr>
@@ -65,20 +67,32 @@
         </table>
         <form action="/admin" method="post">
             <label>Добавить пользователя:</label>
-            <input type="text" name="name" placeholder="Имя">
-            <input type="text" name="password" placeholder="Пароль">
-            <input type="text" name="telNumber" placeholder="Телефон">
-            <input type="text" name="email" placeholder="Почта">
-            <!--            <input type="text" name="title" placeholder="Роль">-->
-            <!--            <form>-->
-            <select name="userRole">
-                <option value="">--Выбрать роль--</option>
-                <option value="admin">Admin</option>
-                <option value="user">User</option>
-            </select>
-            <!--            </form>-->
+            <label>
+                <input type="text" name="name" placeholder="Имя">
+            </label>
+            <label>
+                <input type="text" name="password" placeholder="Пароль">
+            </label>
+            <label>
+                <input type="text" name="telNumber" placeholder="Телефон">
+            </label>
+            <label>
+                <input type="text" name="email" placeholder="Почта">
+            </label>
+            <label>
+                <select name="userRole">
+                    <option value="">--Выбрать роль--</option>
+                    <option value="admin">Admin</option>
+                    <option value="user">User</option>
+                </select>
+            </label>
             <input type="submit" value="Добавить пользователя">
         </form>
+        <p></p>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+    <h1></h1>
     </div>
 </main>
 </body>

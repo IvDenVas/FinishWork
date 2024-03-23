@@ -1,9 +1,6 @@
 package ru.gb.FinishWork.controller;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -16,7 +13,6 @@ import java.util.List;
 
 @Controller
 @AllArgsConstructor
-//@NoArgsConstructor
 @RequestMapping("/admin")
 public class AdminController {
     private UsersServiceImplements usersServiceImplements;
@@ -44,14 +40,31 @@ public class AdminController {
         return "redirect:/admin";
     }
     @GetMapping("/updateUser/{id}")
-    public String updateNoteForm(@PathVariable("id") long id, Model model) {
+    public String updateUserForm(@PathVariable("id") long id, Model model) {
         model.addAttribute("user", usersServiceImplements.getUserById(id));
         return "updateUser";
     }
 
     @PutMapping("/updateUser")
-    public String updateNote(@PathVariable("id") Long id, @ModelAttribute("note") User user) {
+    public String updateUser(@PathVariable("id") Long id, @ModelAttribute("user") User user) {
         usersServiceImplements.updateUser(id, user);
+        return "redirect:/admin";
+    }
+    @GetMapping("/updateNote/{id}")//&&&&
+    public String updateNoteForm(@PathVariable("id") long id, Model model) {
+        model.addAttribute("note", noteServiceImplements.getNoteById(id));
+        return "updateNote";
+    }
+
+    @PutMapping("/updateNote")//&&&&&&
+    public String updateNote(@PathVariable("id") Long id, @ModelAttribute("note") Note note) {
+        noteServiceImplements.updateNoteFromAdmin(id, note);
+        return "redirect:/admin";
+    }
+
+    @GetMapping("/deleteFromAdmin/{id}")
+    public String deleteNote(@PathVariable("id") Long id) {
+        noteServiceImplements.deleteNoteById(id);
         return "redirect:/admin";
     }
 }

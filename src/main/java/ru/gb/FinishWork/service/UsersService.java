@@ -13,4 +13,5 @@ public interface UsersService {
     User newUser(User user);
     void deleteUserById(Long id);
     Optional<User> getUserByName(String name);
+    void registrationUser(User user);
 }

@@ -18,6 +18,7 @@ import ru.gb.FinishWork.service.user.MyUserDetailsService;
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig implements WebSecurityCustomizer {
+
     @Bean
     public UserDetailsService userDetailsService() {
         return new MyUserDetailsService();
@@ -33,9 +34,9 @@ public class SecurityConfig implements WebSecurityCustomizer {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth.requestMatchers("login/**")
+                .authorizeHttpRequests(auth -> auth.requestMatchers("main/login/**")
                         .permitAll()
-                        .requestMatchers("/main/register/**").permitAll()
+                        .requestMatchers("/register").permitAll()
                         .requestMatchers("/main/**").authenticated()
                         .requestMatchers("admin").hasAuthority("admin")
                         .requestMatchers("admin/**").hasAuthority("admin")

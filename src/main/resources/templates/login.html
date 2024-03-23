@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Вход</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/styleLogPage.css}">
-<!--    <link rel="stylesheet" type="text/css" href="/static/css/styleLogPage.css">-->
 </head>
 <body>
     <main>
@@ -19,8 +18,8 @@
                 <div>
                     <input type="password" name="password" placeholder="Password"/>
                 </div>
-                <input type="submit" value="Log in" />
-                <div><span> Не зарегистрирован?<a th:href="@{/main/register}"> Регистрация тут.</a></span>
+                <input type="submit" value="Log in"/>
+                <div><span> Не зарегистрирован?<a th:href="@{/register}"> Регистрация тут.</a></span>
                 </div>
             </form>
         </div>

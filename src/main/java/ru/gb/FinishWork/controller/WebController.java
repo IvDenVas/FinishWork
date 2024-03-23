@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.gb.FinishWork.model.Note;
 import ru.gb.FinishWork.model.User;
+import ru.gb.FinishWork.model.UserRole;
 import ru.gb.FinishWork.service.FileGateway;
 import ru.gb.FinishWork.service.impl.NoteServiceImplements;
 import ru.gb.FinishWork.service.impl.UsersServiceImplements;
@@ -29,18 +30,8 @@ public class WebController {
         return "show";
     }
 
-    @GetMapping("/register")
-    public String registerForm(){
-        return "register";
-    }
-    @PostMapping("/register")
-    public String addUser(User user, Model model){
-        usersServiceImplements.newUser(user);
-        return "redirect:/main";
-    }
-
     @PostMapping()
-    public String addNote(Note note, Model model, Principal principal) {
+    public String addNote(Note note, Principal principal) {
         note.setIdUser(usersServiceImplements.getUserByName(principal.getName()).get().getId());
         noteService.newNote(note);
         fileGateway.writeToFile("NewNotes.txt", "Заголовок: " + note.getTitle() + ", тело заметки:  "

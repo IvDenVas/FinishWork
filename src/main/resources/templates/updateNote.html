@@ -10,8 +10,8 @@
 <body>
 <main>
     <div class="container1">
-        <h2>Измените описания заметки</h2>
-        <form th:action="@{/main}" th:object="${note}" th:method="post" method="post">
+        <h2>Измените заметки</h2>
+        <form th:action="@{/admin}" th:object="${note}" th:method="post" method="post">
             <table>
                 <thead>
                 <tr>
@@ -19,6 +19,7 @@
                     <th>Дата создания</th>
                     <th>Заголовок</th>
                     <th>Описание</th>
+                    <th>ID автора</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -37,13 +38,18 @@
                     </td>
                     <td style="width:50%">
                         <label for="description"></label>
-                        <input size="43%" type="text" th:field="*{description}" id="description">
+                        <input size="55%" type="text" th:field="*{description}" id="description">
+                    </td>
+                    <td style="width:10%">
+                        <label for="idUser"></label>
+                        <input readonly size="10%" type="text" th:field="*{idUser}" id="idUser">
                     </td>
                     <td><a><input type="submit" value="Изменить"></a></td>
                 </tr>
                 </tbody>
             </table>
         </form>
+
 
     </div>
 </main>

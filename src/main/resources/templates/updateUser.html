@@ -24,12 +24,33 @@
                 </thead>
                 <tbody>
                 <tr th:each="user: ${user}">
-                    <td><input size="5%" readonly type="number" th:field="*{id}" id="id"></td>
-                    <td><input size="15%" readonly type="text" th:field="*{name}" id="firstName"></td>
-                    <td><input size="20%" readonly type="text" th:field="*{password}" id="lastName"></td>
-                    <td><input size="20%" type="text" th:field="*{telNumber}" id="telNumber"></td>
-                    <td><input size="20%" type="text" th:field="*{email}" id="email"></td>
-                    <td><input size="20%" type="text" th:field="*{userRole}" id="userRole"></td>
+                    <td>
+                        <label for="id"></label>
+                        <input size="5%" readonly type="number" th:field="*{id}" id="id">
+                    </td>
+                    <td>
+                        <label for="firstName"></label>
+                        <input size="15%" readonly type="text" th:field="*{name}" id="firstName">
+                    </td>
+                    <td>
+                        <label for="lastName"></label>
+                        <input size="20%" readonly type="text" th:field="*{password}" id="lastName">
+                    </td>
+                    <td>
+                        <label for="telNumber"></label>
+                        <input size="20%" type="text" th:field="*{telNumber}" id="telNumber">
+                    </td>
+                    <td>
+                        <label for="email"></label>
+                        <input size="20%" type="text" th:field="*{email}" id="email">
+                    </td>
+                    <td>
+                        <label for="userRole"></label>
+                            <select th:field="*{userRole}" id="userRole">
+                                <option value="">--Выбрать роль--</option>
+                                <option value="admin">Admin</option>
+                                <option value="user">User</option>
+                            </select>
                     <td><a><input type="submit" value="Изменить"></a></td>
                 </tr>
                 </tbody>
