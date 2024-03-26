@@ -22,12 +22,13 @@ public class AdminController {
     public String adminForm(Model model) {
         List<Note> noteList = noteServiceImplements.getAllNotes();
         List<User> userList = usersServiceImplements.getAllUsers();
-        model.addAttribute("users", userList).addAttribute("notes", noteList);
+        model.addAttribute("users", userList)
+                .addAttribute("notes", noteList);
         return "adminPage";
     }
 
     @PostMapping()
-    public String addUser(User user, Model model) {
+    public String addUser(User user) {
         usersServiceImplements.newUser(user);
         return "redirect:/admin";
     }
@@ -41,24 +42,15 @@ public class AdminController {
     }
     @GetMapping("/updateUser/{id}")
     public String updateUserForm(@PathVariable("id") long id, Model model) {
-        model.addAttribute("user", usersServiceImplements.getUserById(id));
+        model.addAttribute("user", usersServiceImplements
+                .getUserById(id));
         return "updateUser";
     }
 
     @PutMapping("/updateUser")
-    public String updateUser(@PathVariable("id") Long id, @ModelAttribute("user") User user) {
+    public String updateUser(@PathVariable("id") Long id,
+                             @ModelAttribute("user") User user) {
         usersServiceImplements.updateUser(id, user);
-        return "redirect:/admin";
-    }
-    @GetMapping("/updateNote/{id}")//&&&&
-    public String updateNoteForm(@PathVariable("id") long id, Model model) {
-        model.addAttribute("note", noteServiceImplements.getNoteById(id));
-        return "updateNote";
-    }
-
-    @PutMapping("/updateNote")//&&&&&&
-    public String updateNote(@PathVariable("id") Long id, @ModelAttribute("note") Note note) {
-        noteServiceImplements.updateNoteFromAdmin(id, note);
         return "redirect:/admin";
     }
 

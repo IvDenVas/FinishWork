@@ -11,7 +11,6 @@ import java.util.Arrays;
 @Aspect
 @Component
 public class NoteAspect {
-
     @After(value = "@annotation(TrackUserAction)")
     public void log(JoinPoint joinPoint){
         System.out.println("Метод: " + joinPoint.getSignature().getName() +", вызван: "+ LocalDateTime.now()

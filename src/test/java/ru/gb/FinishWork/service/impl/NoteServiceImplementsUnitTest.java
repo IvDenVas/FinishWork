@@ -18,11 +18,10 @@ class NoteServiceImplementsUnitTest {
     public void newNoteTest(){
         NoteRepo noteRepo = mock(NoteRepo.class);
         NoteServiceImplements noteServiceImplements = new NoteServiceImplements(noteRepo);
-        Note note = new Note(1L,"1","1", LocalDateTime.now());
-        List<Note> list = new ArrayList<>();
-        list.add(note);
+        Note note = new Note(1L,"1","1", LocalDateTime.now(), 1L);
 
         when(noteRepo.save(note)).thenReturn(note);
+
         assertEquals(note,noteServiceImplements.newNote(note));
     }
 
@@ -30,15 +29,12 @@ class NoteServiceImplementsUnitTest {
     public void getAllNotesTest(){
         NoteRepo noteRepo = mock(NoteRepo.class);
         NoteServiceImplements noteServiceImplements = new NoteServiceImplements(noteRepo);
-        List<Note> list = new ArrayList<>();
-        Note note1 = new Note(1L,"1","1", LocalDateTime.now());
-        Note note2 = new Note(2L,"2","2", LocalDateTime.now());
-        Note note3 = new Note(3L,"3","3", LocalDateTime.now());
-        list.add(note1);
-        list.add(note2);
-        list.add(note3);
 
-        when(noteRepo.findAll()).thenReturn(list);
+        Note note1 = new Note(1L,"1","1", LocalDateTime.now(), 1L);
+        Note note2 = new Note(2L,"2","2", LocalDateTime.now(), 2L);
+        Note note3 = new Note(3L,"3","3", LocalDateTime.now(), 3L);
+
+        when(noteRepo.findAll()).thenReturn(List.of(note1,note2,note3));
 
         List<Note> result = noteServiceImplements.getAllNotes();
 
@@ -53,7 +49,7 @@ class NoteServiceImplementsUnitTest {
     public void getNoteByIdTest(){
         NoteRepo noteRepo = mock(NoteRepo.class);
         NoteServiceImplements noteServiceImplements = new NoteServiceImplements(noteRepo);
-        Note note = new Note(123L,"Test","Des",LocalDateTime.now());
+        Note note = new Note(123L,"Test","Des",LocalDateTime.now(), 1L);
 
         when(noteRepo.findById(123L)).thenReturn(Optional.of(note));
         assertEquals(note,noteServiceImplements.getNoteById(123L));
@@ -65,8 +61,8 @@ class NoteServiceImplementsUnitTest {
         NoteRepo noteRepo = mock(NoteRepo.class);
         NoteServiceImplements noteServiceImplements = new NoteServiceImplements(noteRepo);
         Long id = 1L;
-        Note note = new Note(id, "1", "1", LocalDateTime.now());
-        Note updatedNote = new Note(id, "2", "2", LocalDateTime.now());
+        Note note = new Note(id, "1", "1", LocalDateTime.now(), 1L);
+        Note updatedNote = new Note(id, "2", "2", LocalDateTime.now(), 2L);
 
         when(noteRepo.findById(id)).thenReturn(Optional.of(note));
         when(noteRepo.save(note)).thenReturn(note);
@@ -76,5 +72,19 @@ class NoteServiceImplementsUnitTest {
         assertEquals(updatedNote.getTitle(), result.getTitle());
         assertEquals(updatedNote.getDescription(), result.getDescription());
         assertEquals(updatedNote.getDateTime(), result.getDateTime());
+    }
+
+    @Test
+    void getAllNotesByIdUserTest(){
+        NoteRepo noteRepo = mock(NoteRepo.class);
+        NoteServiceImplements noteServiceImplements = new NoteServiceImplements(noteRepo);
+        Note note = new Note(123L,"Test","Des",LocalDateTime.now(), 1L);
+        Note note1 = new Note(124L,"Test1","Des1",LocalDateTime.now(), 1L);
+        List<Note> noteList = new ArrayList<>();
+        noteList.add(note);
+        noteList.add(note1);
+
+        when(noteRepo.findAllByIdUser(1L)).thenReturn(noteList);
+        assertEquals(noteList, noteServiceImplements.getAllNotesByIdUser(1L));
     }
 }

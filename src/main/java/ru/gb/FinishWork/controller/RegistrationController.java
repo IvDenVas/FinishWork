@@ -21,10 +21,11 @@ public class RegistrationController {
         return "register";
     }
     @PostMapping("/register")
-    public String addUser(@ModelAttribute ("user") User user, Model model){
+    public String addUser(@ModelAttribute ("user") User user,
+                          Model model){
         user.setUserRole(UserRole.user);
         model.addAttribute("user", user);
-        usersServiceImplements.registrationUser(user);
-        return "redirect:/main";
+        usersServiceImplements.newUser(user);
+        return "redirect:/notes";
     }
 }

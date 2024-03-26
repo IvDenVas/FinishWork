@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!--<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">-->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -11,7 +10,7 @@
 <main>
     <div class="container1">
         <h2>Измените описания заметки</h2>
-        <form th:action="@{/main}" th:object="${note}" th:method="post" method="post">
+        <form th:action="@{/notes}" th:object="${note}" th:method="post" method="post">
             <table>
                 <thead>
                 <tr>

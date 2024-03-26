@@ -13,10 +13,14 @@
 <!--    <form action="/main" method="post">-->
     <form th:action="@{/register}" th:object="${user}" th:method="post" method="post">
       <label>Новый пользователь</label>
-      <label for="name"></label><input type="text" name="name" placeholder="Введите имя" th:field="*{name}" id="name">
-      <label for="password"></label><input type="text" name="password" placeholder="Введите пароль" th:field="*{password}" id="password">
-      <label for="telNumber"></label><input type="text" name="telNumber" placeholder="Введите телефон" th:field="*{telNumber}" id="telNumber">
-      <label for="email"></label><input type="text" name="email" placeholder="Введите почту" th:field="*{email}" id="email">
+      <label for="name"></label><input type="text" name="name" placeholder="Введите имя"
+                                       th:field="*{name}" id="name">
+      <label for="password"></label><input type="text" name="password" placeholder="Введите пароль"
+                                           th:field="*{password}" id="password">
+      <label for="telNumber"></label><input type="text" name="telNumber" placeholder="Введите телефон"
+                                            th:field="*{telNumber}" id="telNumber">
+      <label for="email"></label><input type="text" name="email" placeholder="Введите почту"
+                                        th:field="*{email}" id="email">
       <input type="submit" value="Добавить"/>
     </form>
     <h1></h1>

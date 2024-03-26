@@ -9,17 +9,22 @@
 <body>
 <main>
     <div class="container1">
-        <h2>Список заметок</h2>
-        <form action="/main" method="post">
+        <div class="container3" >
+            <p th:text="|Добро пожаловать, ${name}!|" />
+        </div>
+        <h3>Добавить новую заметку:</h3>
+        <form class="container3" action="/notes" method="post">
             <label>Новая заметка</label>
             <label>
                 <input type="text" name="title" placeholder="Введите заголовок">
             </label>
             <label>
-                <input size="90" type="text" name="description" placeholder="Введите заметку">
+                <input size="90" type="text" name="description"
+                       placeholder="Введите заметку">
             </label>
             <input type="submit" value="Добавить">
         </form>
+        <h3>Ваши заметки:</h3>
         <table>
             <thead>
             <tr>
@@ -35,18 +40,21 @@
                 <td style="width:10%" th:text="${note.getDateTime()}"></td>
                 <td style="width:20%" th:text="${note.getTitle()}"></td>
                 <td style="width:50%" th:text="${note.getDescription}"></td>
-                <td><a th:href="@{main/update/{id}(id=${note.id})}">
+                <td><a th:href="@{notes/update/{id}(id=${note.id})}">
                     <button>Изменить</button>
                 </a></td>
-                <td><a th:href="@{main/delete/{id}(id=${note.id})}">
+                <td><a th:href="@{notes/delete/{id}(id=${note.id})}">
                     <button>Удалить</button>
                 </a></td>
             </tr>
             </tbody>
         </table>
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
-        </form>
+        <div class="container2" >
+            <form th:action="@{/logout}" method="post">
+                <label>Для выхода из приложения нажми:
+                </label><input type="submit" value="Выйти"/>
+            </form>
+        </div>
     </div>
 </main>
 </body>

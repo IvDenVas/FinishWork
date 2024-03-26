@@ -9,7 +9,7 @@
 <body>
 <main>
     <div class="container1">
-        <h2>Измените описание заметки</h2>
+        <h2>Измените описания заметки</h2>
         <form th:action="@{/admin}" th:object="${user}" th:method="post" method="post">
             <table>
                 <thead>
@@ -30,11 +30,11 @@
                     </td>
                     <td>
                         <label for="firstName"></label>
-                        <input size="15%" readonly type="text" th:field="*{name}" id="firstName">
+                        <input size="15%" type="text" th:field="*{name}" id="firstName">
                     </td>
                     <td>
                         <label for="lastName"></label>
-                        <input size="20%" readonly type="text" th:field="*{password}" id="lastName">
+                        <input size="20%" type="text" th:field="*{password}" id="lastName">
                     </td>
                     <td>
                         <label for="telNumber"></label>

@@ -9,8 +9,8 @@ import org.springframework.integration.core.GenericTransformer;
 import org.springframework.integration.file.FileWritingMessageHandler;
 import org.springframework.integration.file.support.FileExistsMode;
 import org.springframework.messaging.MessageChannel;
-
 import java.io.File;
+
 
 @Configuration
 public class IntegrationConfig {
@@ -30,7 +30,7 @@ public class IntegrationConfig {
     @Transformer(inputChannel = "textInputChanel", outputChannel = "fileWriterChanel")
     public GenericTransformer<String, String> mainTransformer() {
         return text -> {
-            //какая-то логика
+            //
             return text;
         };
     }
@@ -40,7 +40,7 @@ public class IntegrationConfig {
     public FileWritingMessageHandler messageHandler() {
         FileWritingMessageHandler handler =
                 new FileWritingMessageHandler(new File(
-                        "C:/Users/User/Desktop/GB/ВЭБ-программист/4. Spring/FinishWork"));
+                        "C:/Users/Admin/Desktop/GB/ВЭБ-программист/4. Spring/FinishWork"));
         handler.setExpectReply(false);
         handler.setFileExistsMode(FileExistsMode.APPEND);
         handler.setAppendNewLine(true);

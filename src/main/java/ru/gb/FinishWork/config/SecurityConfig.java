@@ -34,17 +34,16 @@ public class SecurityConfig implements WebSecurityCustomizer {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth.requestMatchers("main/login/**")
-                        .permitAll()
+                .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/register").permitAll()
-                        .requestMatchers("/main/**").authenticated()
+                        .requestMatchers("/notes/**").authenticated()
                         .requestMatchers("admin").hasAuthority("admin")
                         .requestMatchers("admin/**").hasAuthority("admin")
                         .anyRequest().authenticated())
                 .formLogin(form -> form
                                 .loginPage("/login")
                                 .loginProcessingUrl("/login")
-                                .defaultSuccessUrl("/main")
+                                .defaultSuccessUrl("/notes")
                                 .permitAll())
                 .build();
     }

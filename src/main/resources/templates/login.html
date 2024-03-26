@@ -9,17 +9,21 @@
     <main>
         <div class="container1">
             <h1>Авторизуйтесь</h1>
-            <div th:if="${param.error}">Пользователь! Проверьте логин и пароль!</div>
+            <div th:if="${param.error}">Пользователь не найден! Проверьте логин и пароль!</div>
             <div th:if="${param.logout}">Вы можете выйти из системы.</div>
             <form th:action="@{/login}" method="post">
                 <div>
-                    <input type="text" name="username" placeholder="Login"/>
+                    <label>
+                        <input type="text" name="username" placeholder="Login"/>
+                    </label>
                 </div>
                 <div>
-                    <input type="password" name="password" placeholder="Password"/>
+                    <label>
+                        <input type="password" name="password" placeholder="Password"/>
+                    </label>
                 </div>
                 <input type="submit" value="Log in"/>
-                <div><span> Не зарегистрирован?<a th:href="@{/register}"> Регистрация тут.</a></span>
+                <div><span>Не зарегистрирован?<a th:href="@{/register}"> Регистрация тут.</a></span>
                 </div>
             </form>
         </div>
